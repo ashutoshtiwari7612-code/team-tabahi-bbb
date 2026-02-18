@@ -9,17 +9,6 @@ app.listen(3000, () => {
   console.log("Web server started on port 3000");
 });
 
-
-// 👇 Iske neeche Discord bot ka code start hoga
-
-const { 
-  Client, 
-  GatewayIntentBits, 
-  SlashCommandBuilder, 
-  REST, 
-  Routes 
-} = require("discord.js");
-
 const { 
   Client, 
   GatewayIntentBits, 

@@ -42,7 +42,7 @@ const promoRegex = /(http[s]?:\/\/|www\.|t\.me|instagram\.com|youtube\.com)/i;
 
 // ✅ READY
 client.once("ready", async () => {
-  console.log(`Logged in as ${client.user.tag}`);
+  console.log("Bot is ready!");
 
   const commands = [
     new SlashCommandBuilder().setName("join").setDescription("Join VC"),
@@ -56,13 +56,14 @@ client.once("ready", async () => {
     await rest.put(
       Routes.applicationGuildCommands(
         client.user.id,
-        "1469732289180209376"
+        process.env.GUILD_ID
       ),
       { body: commands }
     );
-    console.log("Guild slash commands registered instantly.");
-  } catch (err) {
-    console.error(err);
+
+    console.log("Commands successfully registered.");
+  } catch (error) {
+    console.error("Slash command error:", error);
   }
 });
 

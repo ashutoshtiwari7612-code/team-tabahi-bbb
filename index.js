@@ -134,7 +134,7 @@ client.on("messageCreate", async (message) => {
   // 🔥 Auto VC TTS
   if (connection && message.content.length > 0) {
 
-    const tts = new gTTS(message.content, "en");
+    const tts = new gTTS(message.content, "hi");
     const filePath = "./tts.mp3";
 
     tts.save(filePath, function () {

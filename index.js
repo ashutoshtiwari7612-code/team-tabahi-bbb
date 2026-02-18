@@ -55,4 +55,36 @@ client.on("messageCreate", async (message) => {
   }
 });
 
+// 🎤 TTS Command
+  if (message.content.startsWith("!say ")) {
+    if (!message.member.voice.channel) {
+      return message.reply("❌ Pehle VC join karo.");
+    }
+
+    const text = message.content.slice(5);
+
+    const connection = joinVoiceChannel({
+      channelId: message.member.voice.channel.id,
+      guildId: message.guild.id,
+      adapterCreator: message.guild.voiceAdapterCreator,
+    });
+
+    const tts = new gTTS(text, "en");
+    const filePath = `./tts.mp3`;
+
+    tts.save(filePath, function () {
+      const player = createAudioPlayer();
+      const resource = createAudioResource(filePath);
+
+      connection.subscribe(player);
+      player.play(resource);
+
+      player.on(AudioPlayerStatus.Idle, () => {
+        connection.destroy();
+        fs.unlinkSync(filePath);
+      });
+    });
+  }
+});
+
 client.login(process.env.TOKEN);

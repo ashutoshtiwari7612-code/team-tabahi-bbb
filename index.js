@@ -1,3 +1,4 @@
+const prefix = "$";
 const { Client, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
@@ -50,13 +51,13 @@ client.on("messageCreate", async (message) => {
     });
   }
 
-  if (message.content === "!ping") {
+  if (message.content === "$ping") {
     message.reply("🏓 Pong!");
   }
 });
 
 // 🎤 TTS Command
-  if (message.content.startsWith("!say ")) {
+  if (message.content.startsWith("$say ")) {
     if (!message.member.voice.channel) {
       return message.reply("❌ Pehle VC join karo.");
     }

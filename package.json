@@ -1,11 +1,14 @@
 {
-  "name": "team-tabahi-bot",
+  "name": "discord-bot",
   "version": "1.0.0",
+  "description": "Moderation + TTS Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "discord.js": "^14.14.1",
+    "@discordjs/voice": "^0.16.0",
+    "gtts": "^0.2.1"
   }
 }

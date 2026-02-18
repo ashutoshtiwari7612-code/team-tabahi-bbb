@@ -51,13 +51,13 @@ client.on("messageCreate", async (message) => {
     });
   }
 
-  if (message.content === "$ping") {
+if (message.content === prefix + "ping") {
     message.reply("🏓 Pong!");
   }
 });
 
 // 🎤 TTS Command
-  if (message.content.startsWith("$say ")) {
+if (message.content.startsWith(prefix + "say ")) {
     if (!message.member.voice.channel) {
       return message.reply("❌ Pehle VC join karo.");
     }

@@ -45,29 +45,25 @@ client.once("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
   const commands = [
-
-    new SlashCommandBuilder()
-      .setName("join")
-      .setDescription("Join your voice channel"),
-
-    new SlashCommandBuilder()
-      .setName("leave")
-      .setDescription("Leave voice channel"),
-
-    new SlashCommandBuilder()
-      .setName("ping")
-      .setDescription("Check bot latency")
-
+    new SlashCommandBuilder().setName("join").setDescription("Join VC"),
+    new SlashCommandBuilder().setName("leave").setDescription("Leave VC"),
+    new SlashCommandBuilder().setName("ping").setDescription("Check latency")
   ].map(cmd => cmd.toJSON());
 
   const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-  await rest.put(
-    Routes.applicationCommands(client.user.id),
-    { body: commands }
-  );
-
-  console.log("Slash commands registered");
+  try {
+    await rest.put(
+      Routes.applicationGuildCommands(
+        client.user.id,
+        "1469732289180209376"
+      ),
+      { body: commands }
+    );
+    console.log("Guild slash commands registered instantly.");
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 

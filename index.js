@@ -16,6 +16,40 @@ client.once("ready", () => {
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
+  const badWords = ["madarchod", "bhosdike", "bsdk", "terimakichut", "chut", "chod", "madharchode", "randi", "behenkelund", "behen ke lode", "randd", "rand"];
+  const inviteRegex = /(discord\.gg|discord\.com\/invite)/;
+  const promoRegex = /(http[s]?:\/\/|www\.|t\.me|instagram\.com|youtube\.com)/;
+
+  // 🔴 Abuse Filter
+  if (badWords.some(word => message.content.toLowerCase().includes(word))) {
+    await message.delete();
+    await message.member.timeout(5 * 60 * 1000, "Abuse Language");
+
+    return message.channel.send({
+      content: `⚠️ ${message.author} Gali allowed nahi hai! Tumhe 5 minute ke liye mute kiya gaya hai.`
+    });
+  }
+
+  // 🔴 Invite Link Block
+  if (inviteRegex.test(message.content)) {
+    await message.delete();
+    await message.member.timeout(5 * 60 * 1000, "Invite Link");
+
+    return message.channel.send({
+      content: `⚠️ ${message.author} Invite link allowed nahi hai! Tumhe 5 minute ke liye mute kiya gaya hai.`
+    });
+  }
+
+  // 🔴 Promo / External Links Block
+  if (promoRegex.test(message.content)) {
+    await message.delete();
+    await message.member.timeout(5 * 60 * 1000, "Promotion Link");
+
+    return message.channel.send({
+      content: `⚠️ ${message.author} Promotion allowed nahi hai! Tumhe 5 minute ke liye mute kiya gaya hai.`
+    });
+  }
+
   if (message.content === "!ping") {
     message.reply("🏓 Pong!");
   }
